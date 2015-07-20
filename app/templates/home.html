@@ -1,1 +1,16 @@
-<h1>Home Page</h1>
+<body ng-controller="timerController">
+    <div class='container'>
+      <div class="controls">
+        <button class= "work" ng-click="beginWork()">Work</button>
+        <button class= "break" ng-click="beginBreak()">Break</button>
+      </div>
+      <h2>
+        {{timeLeft}}
+      </h2>
+      <div class="controls">
+        <button class= "start" ng-click="timeStart()" ng-disabled="disabled">Start</button>
+        <button class= "stop"  ng-click="stopTimer()">Stop</button>  
+        <button class= "reset"  ng-click="resetTimer()">Reset</button>
+      </div>
+  </div>
+</body>
