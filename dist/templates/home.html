@@ -4,13 +4,26 @@
         <button class= "work" ng-click="beginWork()">Work</button>
         <button class= "break" ng-click="beginBreak()">Break</button>
       </div>
-      <h2>
-        {{timeLeft}}
-      </h2>
-      <div class="controls">
-        <button class= "start" ng-click="timeStart()" ng-disabled="disabled">Start</button>
-        <button class= "stop"  ng-click="stopTimer()">Stop</button>  
-        <button class= "reset"  ng-click="resetTimer()">Reset</button>
+      <div ng-hide="breakTime">
+        <h2>
+          {{timeLeft | convertToCountdown}}
+        </h2>
+        <div class="controls">
+          <button class= "start" ng-click="timeStart()" ng-disabled="disabled">Start</button>
+          <button class= "stop"  ng-click="stopTimer()">Stop</button>  
+          <button class= "reset"  ng-click="resetTimer()">Reset</button>
+        </div>
+      </div>
+
+      <div ng-show="breakTime">
+        <h2>
+          {{breakTime | convertToCountdown}}
+        </h2>
+        <div class="controls">
+          <button class= "start" ng-click="breakStart()" ng-disabled="disabled">Start</button>
+          <button class= "stop"  ng-click="stopBreak()">Stop</button>  
+          <button class= "reset"  ng-click="resetBreak()">Reset</button>
+        </div>
       </div>
   </div>
 </body>
