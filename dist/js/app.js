@@ -11,15 +11,17 @@ app.config(['$locationProvider', '$stateProvider', function($locationProvider, $
       });
   }]);
 
-app.controller('timerController',['$scope', '$interval', function($scope, $interval){
-    var time;
-    var workingTime = 1500;
-    var shortBreak = 300;
-    var longBreak = 1800;
+app.controller('timerController',['$scope', '$interval', '$firebase', function($scope, $interval, $firebase){
+   var ref = new Firebase('https://bloc-time.firebaseio.com/tasks');
+   var sync = $firebase(ref);
 
-    // var workingTime = 2;
-    // var shortBreak = 3;
-    // var longBreak = 4;
+    var time;
+    // var workingTime = 1500;
+    // var shortBreak = 300;
+    // var longBreak = 1800;
+    var workingTime = 2;
+    var shortBreak = 3;
+    var longBreak = 4;
     var breakTime;
 
     $scope.timeLeft = workingTime;  
@@ -57,7 +59,8 @@ app.controller('timerController',['$scope', '$interval', function($scope, $inter
         }
     	}, 1000 );
   	}; 
-  
+    
+
   	$scope.stopTimer = function(){
       if (time) {
       	$scope.disabled = false;
@@ -75,6 +78,24 @@ app.controller('timerController',['$scope', '$interval', function($scope, $inter
       $scope.timeLeft = timeLimit;
       $scope.timerStart();
     };
+
+    var tasks = sync.$asArray();
+    $scope.tasks = tasks;
+
+    $scope.addTask = function(task) {
+      $scope.tasks.$add({
+        task: task,
+        state: "active",
+        dateAdded: Firebase.ServerValue.TIMESTAMP
+      });
+      $scope.newTaskItem = "";
+    };
+    $scope.completeTask = function(taskId) {
+      var task = tasks.$getRecord(taskId);
+      task.state = "complete";
+      tasks.$save(task);
+    };
+
  }]);
 
 app.filter('convertToCountdown', function() {

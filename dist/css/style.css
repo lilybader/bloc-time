@@ -1,0 +1,16 @@
+html {
+  text-align: center;
+  color: #3c3633; }
+
+body {
+  font-family: 'Helvetica Neue', sans-serif;
+  font-weight: bold;
+  letter-spacing: -1px;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase; }
+  body h1 {
+    font-size: 75px; }
+  body a {
+    text-decoration: none;
+    color: #3c3633; }

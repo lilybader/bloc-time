@@ -16,5 +16,23 @@
         </div>
       </div>
 
+  <div class="task-menu">
+    <form class="form-inline" ng-submit="addTask(newTaskItem)">     
+      <div class ="form-group">
+        <input type="text" class="form-control" placeholder="What do I need to do?" ng-model="newTaskItem">
+      </div>  
+      <br/>        
+      <button type="submit" class="add-btn">add</button>   
+    </form>
+
+    <div ng-repeat="task in tasks">
+    <ul> 
+      <li class="todo" ng-show="task.state == 'active'">
+        {{task.task}} 
+        <button class="button check"  ng-click="completeTask(task.$id)"></button>
+      </li>
+    </ul>
+   </div> 
+
   </div>
 </body>
